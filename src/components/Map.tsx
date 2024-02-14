@@ -1,9 +1,9 @@
 interface Props {
-  address: string;
+  ip: string;
 }
 
-const Map = ({ address }: Props) => {
-  return <div>{address}</div>;
+const Map = ({ ip }: Props) => {
+  return <div>{ip}</div>;
 };
 
 export default Map;

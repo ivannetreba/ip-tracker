@@ -5,9 +5,10 @@ import { Flex, Heading, useBreakpointValue } from "@chakra-ui/react";
 
 interface Props {
   address: (newAddress: string) => void;
+  isLoading: boolean;
 }
 
-const Header = ({ address }: Props) => {
+const Header = ({ address, isLoading }: Props) => {
   const bgImage = useBreakpointValue({
     base: `url(${bgImageMobile})`,
     md: `url(${bgImageDesktop})`,
@@ -26,12 +27,12 @@ const Header = ({ address }: Props) => {
         fontSize={["26px", null, "32px"]}
         margin="auto"
         mt={["26px", null, "33px"]}
-        mb="10px"
+        mb="7px"
         color="white"
       >
         IP Address Tracker
       </Heading>
-      <SearchInput address={address} />
+      <SearchInput address={address} isLoading={isLoading} />
     </Flex>
   );
 };

@@ -5,6 +5,7 @@ import {
   Image,
   Text,
   Box,
+  Spinner,
 } from "@chakra-ui/react";
 import arrowIcon from "../assets/images/icon-arrow.svg";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -23,9 +24,10 @@ type IPInput = z.infer<typeof schema>;
 
 interface Props {
   address: (newAddress: string) => void;
+  isLoading: boolean;
 }
 
-const SearchInput = ({ address }: Props) => {
+const SearchInput = ({ address, isLoading }: Props) => {
   const {
     register,
     handleSubmit,
@@ -65,9 +67,13 @@ const SearchInput = ({ address }: Props) => {
             h="58px"
             w="58px"
           >
-            <button type="submit">
-              <Image src={arrowIcon} />
-            </button>
+            {isLoading ? (
+              <Spinner color="white" />
+            ) : (
+              <button type="submit">
+                <Image src={arrowIcon} />
+              </button>
+            )}
           </InputRightElement>
         </InputGroup>
       </Box>
