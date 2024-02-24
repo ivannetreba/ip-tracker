@@ -28,7 +28,6 @@ const SearchInput = ({ address, isLoading, error }: Props) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<IPInput>({ resolver: zodResolver(schema) });
 
