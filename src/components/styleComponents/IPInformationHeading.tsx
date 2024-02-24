@@ -12,6 +12,7 @@ const IPInformationHeading = ({ children, ...props }: IPProps) => {
       textTransform="uppercase"
       color="DarkGray"
       fontSize={{ base: "10px", xl: "12px" }}
+      fontWeight="700"
       mb="7px"
       {...props}
     >

@@ -11,7 +11,7 @@ const IPInformationText = ({ children, ...props }: IPProps) => {
       textAlign={{ base: "center", xl: "left" }}
       color="VeryDarkGray"
       fontSize={{ base: "20px", xl: "26px" }}
-      fontWeight="bold"
+      fontWeight="500"
       {...props}
     >
       {children}

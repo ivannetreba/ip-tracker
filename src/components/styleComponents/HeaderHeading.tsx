@@ -10,6 +10,7 @@ const HeaderHeading = ({ children, ...props }: IPProps) => {
     <Heading
       as="h1"
       fontSize={["26px", null, "32px"]}
+      fontWeight="500"
       margin="auto"
       mt={["26px", null, "33px"]}
       mb="7px"
