@@ -5,7 +5,7 @@ interface IPProps extends GridProps {
   children?: ReactNode;
 }
 
-const GridIP = ({ children, ...props }: IPProps) => {
+const IPInformationGrid = ({ children, ...props }: IPProps) => {
   return (
     <Grid
       templateAreas={{
@@ -17,19 +17,20 @@ const GridIP = ({ children, ...props }: IPProps) => {
         xl: "1fr 1fr 1fr 1fr",
       }}
       gap="22px"
-      justifyContent="center"
-      justifyItems="center"
+      justifyContent={{ base: "center", xl: "left" }}
+      justifyItems={{ base: "center", xl: "left" }}
       bg="white"
       borderRadius="15px"
       boxShadow="sm"
       position="absolute"
-      py={{ base: "25px", lg: "36px" }}
-      px={{ base: "20px", lg: "30px" }}
+      py={{ base: "25px", xl: "36px" }}
+      px={{ base: "20px", xl: "30px" }}
       top="-80px"
       left="50%"
       transform="translateX(-50%)"
       minH="161px"
-      w={{ base: "327px", lg: "1110px" }}
+      w={{ base: "327px", xl: "1110px" }}
+      zIndex={10}
       {...props}
     >
       {children}
@@ -37,4 +38,4 @@ const GridIP = ({ children, ...props }: IPProps) => {
   );
 };
 
-export default GridIP;
+export default IPInformationGrid;

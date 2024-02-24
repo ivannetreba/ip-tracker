@@ -6,13 +6,13 @@ interface IPProps extends GridItemProps {
   index?: number;
 }
 
-const GridIP = ({ children, index, ...props }: IPProps) => {
+const IPInformationGridItem = ({ children, index, ...props }: IPProps) => {
   return (
     <GridItem
-      borderLeft={{ lg: `${index !== 0 ? "1px solid #979797" : "none"}` }}
+      borderLeft={{ xl: `${index !== 0 ? "1px solid #979797" : "none"}` }}
       _first={{ borderLeft: "none" }}
-      pl={{ lg: "34px" }}
-      ml={{ lg: "24px" }}
+      pl={{ xl: "34px" }}
+      ml={{ xl: "24px" }}
       {...props}
     >
       {children}
@@ -20,4 +20,4 @@ const GridIP = ({ children, index, ...props }: IPProps) => {
   );
 };
 
-export default GridIP;
+export default IPInformationGridItem;

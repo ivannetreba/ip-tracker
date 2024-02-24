@@ -1,16 +1,12 @@
-import {
-  Input,
-  InputGroup,
-  InputRightElement,
-  Image,
-  Text,
-  Box,
-  Spinner,
-} from "@chakra-ui/react";
+import { InputGroup, Image, Box, Spinner } from "@chakra-ui/react";
 import arrowIcon from "../assets/images/icon-arrow.svg";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import SearchInputInput from "./styleComponents/SearchInputInput";
+import SearchInputRightElement from "./styleComponents/SearchInputRightElement";
+import SearchInputFormBox from "./styleComponents/SearchInputFormBox";
+import CustomErrorText from "./styleComponents/CustomErrorText";
 
 const schema = z.object({
   ipinput: z
@@ -25,9 +21,10 @@ type IPInput = z.infer<typeof schema>;
 interface Props {
   address: (newAddress: string) => void;
   isLoading: boolean;
+  error?: string | null;
 }
 
-const SearchInput = ({ address, isLoading }: Props) => {
+const SearchInput = ({ address, isLoading, error }: Props) => {
   const {
     register,
     handleSubmit,
@@ -41,32 +38,17 @@ const SearchInput = ({ address, isLoading }: Props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Box
-        px="24px"
-        m={"auto"}
-        mb={["24px", "48px"]}
-        w={["375px", null, "555px"]}
-      >
+      {" "}
+      <SearchInputFormBox>
         <Box h={"20px"} w={"100%"} mb={"5px"}>
-          {errors.ipinput && <Text color="red">{errors.ipinput.message}</Text>}
+          {errors.ipinput && (
+            <CustomErrorText>{errors.ipinput.message}</CustomErrorText>
+          )}
+          {error && <CustomErrorText>{error}</CustomErrorText>}
         </Box>
         <InputGroup>
-          <Input
-            border="none"
-            borderRadius="15px"
-            bg="white"
-            type="text"
-            h="58px"
-            placeholder="Search for IP address or domain"
-            {...register("ipinput")}
-          />
-          <InputRightElement
-            bg="black"
-            borderTopRightRadius="15px"
-            borderBottomRightRadius="15px"
-            h="58px"
-            w="58px"
-          >
+          <SearchInputInput {...register("ipinput")} />
+          <SearchInputRightElement>
             {isLoading ? (
               <Spinner color="white" />
             ) : (
@@ -74,9 +56,9 @@ const SearchInput = ({ address, isLoading }: Props) => {
                 <Image src={arrowIcon} />
               </button>
             )}
-          </InputRightElement>
+          </SearchInputRightElement>
         </InputGroup>
-      </Box>
+      </SearchInputFormBox>
     </form>
   );
 };

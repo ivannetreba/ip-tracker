@@ -1,39 +1,19 @@
 import SearchInput from "./SearchInput";
-import bgImageMobile from "../assets/images/pattern-bg-mobile.png";
-import bgImageDesktop from "../assets/images/pattern-bg-desktop.png";
-import { Flex, Heading, useBreakpointValue } from "@chakra-ui/react";
+import HeaderContainer from "./styleComponents/HeaderContainer";
+import HeaderHeading from "./styleComponents/HeaderHeading";
 
 interface Props {
   address: (newAddress: string) => void;
   isLoading: boolean;
+  error?: string | null;
 }
 
-const Header = ({ address, isLoading }: Props) => {
-  const bgImage = useBreakpointValue({
-    base: `url(${bgImageMobile})`,
-    md: `url(${bgImageDesktop})`,
-  });
-
+const Header = ({ address, isLoading, error }: Props) => {
   return (
-    <Flex
-      bgImage={bgImage}
-      bgPosition="center"
-      bgRepeat="no-repeat"
-      h="280px"
-      flexDirection="column"
-    >
-      <Heading
-        as="h1"
-        fontSize={["26px", null, "32px"]}
-        margin="auto"
-        mt={["26px", null, "33px"]}
-        mb="7px"
-        color="white"
-      >
-        IP Address Tracker
-      </Heading>
-      <SearchInput address={address} isLoading={isLoading} />
-    </Flex>
+    <HeaderContainer>
+      <HeaderHeading>IP Address Tracker</HeaderHeading>
+      <SearchInput address={address} isLoading={isLoading} error={error} />
+    </HeaderContainer>
   );
 };
 

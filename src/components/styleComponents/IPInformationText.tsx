@@ -5,12 +5,12 @@ interface IPProps extends TextProps {
   children?: ReactNode;
 }
 
-const TextIP = ({ children, ...props }: IPProps) => {
+const IPInformationText = ({ children, ...props }: IPProps) => {
   return (
     <Text
-      textAlign="center"
+      textAlign={{ base: "center", xl: "left" }}
       color="VeryDarkGray"
-      fontSize={{ base: "20px", lg: "26px" }}
+      fontSize={{ base: "20px", xl: "26px" }}
       fontWeight="bold"
       {...props}
     >
@@ -19,4 +19,4 @@ const TextIP = ({ children, ...props }: IPProps) => {
   );
 };
 
-export default TextIP;
+export default IPInformationText;

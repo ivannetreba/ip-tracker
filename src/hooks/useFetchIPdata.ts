@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { IPdetection } from '../types/types';
 
-const useFetchIPdata = (address: string) => {
+const useFetchIPdata = (address: string | null) => {
   const [ipDetection, setIpDetection] = useState<IPdetection | null>(null)
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
-    if (!address.trim()) {
+    if (!address || !address.trim()) {
       setIpDetection(null);
       setError(null);
       return;
@@ -25,18 +25,23 @@ const useFetchIPdata = (address: string) => {
         const res = await fetch(URL, {
           signal: abortControllerRef.current.signal,
         });
-        if (res.status === 404) {
-          setError("Page not found");
+
+        if (!res.ok) {
+          const message = res.status === 422 ? "Invalid IP address format." : "An error occurred.";
+          setError(message);
           setIpDetection(null);
           return;
         }
+
         const data = await res.json() as IPdetection;
         setIpDetection(data);
         setError(null);
+
       } catch (error: any) {
         if (error.name === "AbortError") return;
         setError(error.message);
         setIpDetection(null);
+        
       } finally {
         setIsLoading(false);
       }

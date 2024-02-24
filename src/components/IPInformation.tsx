@@ -1,12 +1,12 @@
 import { Box } from "@chakra-ui/react";
 import { IPdetection } from "../types/types";
-import GridIP from "./styleComponents/GridIP";
-import HeadingIP from "./styleComponents/HeadingIP";
-import TextIP from "./styleComponents/TextIP";
-import GridItemIP from "./styleComponents/GridItemIP";
+import IPInformationGrid from "./styleComponents/IPInformationGrid";
+import IPInformationHeading from "./styleComponents/IPInformationHeading";
+import IPInformationText from "./styleComponents/IPInformationText";
+import IPInformationGridItem from "./styleComponents/IPInformationGridItem";
 
 interface Props {
-  ipDetection: IPdetection;
+  ipDetection: IPdetection | null;
 }
 
 const IPInformation = ({ ipDetection }: Props) => {
@@ -14,35 +14,39 @@ const IPInformation = ({ ipDetection }: Props) => {
     {
       area: "ipaddress",
       heading: "IP Address",
-      text: ipDetection.ip,
+      text: ipDetection?.ip || "192.212.174.100",
     },
     {
       area: "location",
       heading: "Location",
-      text: `${ipDetection.location.city}, ${ipDetection.location.country}`,
+      text: ipDetection?.location?.city
+        ? `${ipDetection?.location?.city}, ${ipDetection?.location?.country}`
+        : "South San Gabriel, US",
     },
     {
       area: "timezone",
       heading: "Timezone",
-      text: ipDetection.location.timezone,
+      text: ipDetection?.location?.timezone || "-08:00",
     },
     {
       area: "isp",
       heading: "ISP",
-      text: ipDetection.isp,
+      text: ipDetection?.isp || "Southern California Edison",
     },
   ];
 
   return (
     <Box position="relative">
-      <GridIP>
+      <IPInformationGrid>
         {dataIP.map((item, index) => (
-          <GridItemIP index={index} key={index} gridArea={item.area}>
-            <HeadingIP>{item.heading}</HeadingIP>
-            <TextIP>{item.text}</TextIP>
-          </GridItemIP>
+          <IPInformationGridItem index={index} key={index} gridArea={item.area}>
+            <IPInformationHeading>{item.heading}</IPInformationHeading>
+            <IPInformationText>
+              {item.text || "No information"}
+            </IPInformationText>
+          </IPInformationGridItem>
         ))}
-      </GridIP>
+      </IPInformationGrid>
     </Box>
   );
 };

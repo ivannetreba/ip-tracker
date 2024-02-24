@@ -5,14 +5,15 @@ interface IPProps extends HeadingProps {
   children?: ReactNode;
 }
 
-const HeadingIP = ({ children, ...props }: IPProps) => {
+const HeaderHeading = ({ children, ...props }: IPProps) => {
   return (
     <Heading
-      textAlign="center"
-      textTransform="uppercase"
-      color="DarkGray"
-      fontSize={{ base: "10px", lg: "12px" }}
+      as="h1"
+      fontSize={["26px", null, "32px"]}
+      margin="auto"
+      mt={["26px", null, "33px"]}
       mb="7px"
+      color="white"
       {...props}
     >
       {children}
@@ -20,4 +21,4 @@ const HeadingIP = ({ children, ...props }: IPProps) => {
   );
 };
 
-export default HeadingIP;
+export default HeaderHeading;
